@@ -144,6 +144,48 @@ router.get('/getAllRoutes', (req, res) => {
     res.send({routes: cachedRoutes});
 });
 
+router.get('/getEventMessageIK', (req, res) => {
+    const data = {
+        sections: [
+            {
+                title: "EventBodyText",
+                textParts: [
+                    {text: "A ", bold: false},
+                    {text: "30 minute ", bold: true},
+                    {text: "long event where we will launch the ", bold: false},
+                    {text: "biggest mBus update ", bold: true},
+                    {text: "yet, as well as talk briefly about how ", bold: false},
+                    {text: "you ", bold: true},
+                    {text: "can join the mBus development team.", bold: false},
+                    {text: " text.", bold: false}
+                ]
+            },
+            {
+                title: "EventDetails",
+                textParts: [
+                  {detail: "Building: ", text: "Central Campus Classroom Building (CCCB)"},
+                  {detail: "Room: ", text: "Auditorium (Room 1420)"},
+                  {detail: "Date and Time: ", text: "Thursday May 26th, 7:00pm - 7:30pm"}
+                ]
+            },
+            {
+                title: "EventTitleAndSubtitle",
+                textParts: [
+                  {title: "YOU'RE INVITED"},
+                  {subtitle: "to the mBus 2.0 launch event"},
+                ]
+            }
+        ]
+    };
+    res.json(data);
+});
+
+router.get('/getEventImageIK', (req, res) => {
+    const dirname = import.meta.dirname;
+    const assetPath = path.join(dirname, 'assets');
+    res.sendFile(path.join(assetPath, 'bus_CN.png'));
+});
+
 router.get('/getVehicleImage/:route', (req, res) => {
    const { route } = req.params;
    const isColorblind = req.query.colorblind === "Y";
