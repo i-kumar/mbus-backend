@@ -144,7 +144,33 @@ router.get('/getAllRoutes', (req, res) => {
     res.send({routes: cachedRoutes});
 });
 
-router.get('/getEventMessageIK', (req, res) => {
+router.get('/getEventButtonInformation', (req, res) => {
+    const data = {
+        sections: [
+            {
+                title: "shouldButtonBeShown",
+                bool: false // <-------------- toggle this to "true" to start showing the button
+            },
+            {
+                title: "eventInformation",
+
+                // in the future, we'll write a function that will be calculating
+                // these fields automatically:
+                timeLeft: "9d",
+                progressBarPercentage: 0.9,
+                
+                // replace with a calendar invite link in the future
+                link: "https://www.google.com"
+            }
+        ]
+    };
+    res.json(data);
+});
+
+// does not get called as long as the button is disabled above
+router.get('/getEventMessage', (req, res) => {
+
+    // sample data, will get updated in the future
     const data = {
         sections: [
             {
@@ -180,10 +206,10 @@ router.get('/getEventMessageIK', (req, res) => {
     res.json(data);
 });
 
-router.get('/getEventImageIK', (req, res) => {
+router.get('/getEventImage', (req, res) => {
     const dirname = import.meta.dirname;
     const assetPath = path.join(dirname, 'assets');
-    res.sendFile(path.join(assetPath, 'bus_CN.png'));
+    res.sendFile(path.join(assetPath, '(sample)auditorium-1.png'));
 });
 
 router.get('/getVehicleImage/:route', (req, res) => {
